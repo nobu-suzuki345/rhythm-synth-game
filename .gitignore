@@ -22,3 +22,15 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Qiita記事関連ファイル（コミットしない）
+qiita-article.md
+SCREENSHOT_INSTRUCTIONS.md
+*.png
+images/
+
+# Qiita記事関連ファイル（コミットしない）
+qiita-article.md
+SCREENSHOT_INSTRUCTIONS.md
+*.png
+images/

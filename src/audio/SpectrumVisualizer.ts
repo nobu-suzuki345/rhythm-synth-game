@@ -28,8 +28,21 @@ export class SpectrumVisualizer {
     private resizeCanvas(): void {
         const container = this.canvas.parentElement;
         if (container) {
-            this.canvas.width = container.clientWidth;
-            this.canvas.height = container.clientHeight;
+            const width = container.clientWidth;
+            const height = container.clientHeight;
+            
+            // サイズが0の場合はデフォルト値を設定
+            if (width > 0 && height > 0) {
+                this.canvas.width = width;
+                this.canvas.height = height;
+            } else {
+                // フォールバック: CSSで設定されたサイズを使用
+                const rect = container.getBoundingClientRect();
+                if (rect.width > 0 && rect.height > 0) {
+                    this.canvas.width = rect.width;
+                    this.canvas.height = rect.height;
+                }
+            }
         }
     }
 
@@ -38,6 +51,18 @@ export class SpectrumVisualizer {
      */
     start(): void {
         if (this.isRunning) return;
+        
+        // キャンバスサイズを再設定（ゲーム画面が表示された後に確実にサイズを取得）
+        this.resizeCanvas();
+        
+        // デバッグ: キャンバスサイズを確認
+        console.log('📊 スペクトラム可視化開始', {
+            width: this.canvas.width,
+            height: this.canvas.height,
+            containerWidth: this.canvas.parentElement?.clientWidth,
+            containerHeight: this.canvas.parentElement?.clientHeight
+        });
+        
         this.isRunning = true;
         this.animate();
     }
@@ -71,6 +96,13 @@ export class SpectrumVisualizer {
         const frequencyData = this.synth.getFrequencyData();
         const width = this.canvas.width;
         const height = this.canvas.height;
+        
+        // キャンバスサイズが0の場合は描画をスキップ
+        if (width === 0 || height === 0) {
+            // サイズが0の場合は再試行
+            this.resizeCanvas();
+            return;
+        }
 
         // 背景をクリア（グラデーション）
         const gradient = this.ctx.createLinearGradient(0, 0, 0, height);
