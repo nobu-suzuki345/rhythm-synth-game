@@ -1,0 +1,6 @@
+/**
+ * UIモジュールのエクスポート
+ */
+
+export * from './UIManager';
+

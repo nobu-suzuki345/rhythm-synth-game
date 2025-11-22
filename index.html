@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <title>🎵 Rhythm Synth Game - TypeScript + Web Audio API</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- タイトル画面 -->
+      <div id="titleScreen" class="screen active">
+        <h1 class="title">🎵 Rhythm Synth Game</h1>
+        <p class="subtitle">TypeScript × Web Audio API で作る音楽ゲーム</p>
+        
+        <div class="difficulty-selector">
+          <h2>難易度を選択</h2>
+          <div class="difficulty-cards">
+            <button class="difficulty-card easy" data-difficulty="easy">
+              <div class="difficulty-icon">🟢</div>
+              <h3>EASY</h3>
+              <p>速度: ゆっくり</p>
+              <p>鍵盤: 3つ</p>
+              <p>音符: 10個</p>
+              <p>判定: 甘い (±120ms)</p>
+            </button>
+            
+            <button class="difficulty-card normal" data-difficulty="normal">
+              <div class="difficulty-icon">🟡</div>
+              <h3>NORMAL</h3>
+              <p>速度: 普通</p>
+              <p>鍵盤: 5つ</p>
+              <p>音符: 18個</p>
+              <p>判定: 普通 (±100ms)</p>
+            </button>
+            
+            <button class="difficulty-card hard" data-difficulty="hard">
+              <div class="difficulty-icon">🟠</div>
+              <h3>HARD</h3>
+              <p>速度: やや速い</p>
+              <p>鍵盤: 7つ</p>
+              <p>音符: 28個</p>
+              <p>判定: 厳しい (±80ms)</p>
+            </button>
+            
+            <button class="difficulty-card expert" data-difficulty="expert">
+              <div class="difficulty-icon">🔴</div>
+              <h3>EXPERT</h3>
+              <p>速度: やや速い</p>
+              <p>鍵盤: 12音</p>
+              <p>音符: 28個</p>
+              <p>判定: 厳しい (±80ms)</p>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ゲーム画面 -->
+      <div id="gameScreen" class="screen">
+        <div class="game-header">
+          <div class="score-area">
+            <div class="score">
+              <span class="label">Score</span>
+              <span id="score" class="value">0</span>
+            </div>
+            <div class="combo">
+              <span class="label">Combo</span>
+              <span id="combo" class="value">0</span>
+            </div>
+          </div>
+          <div class="info-area">
+            <span id="difficulty" class="difficulty-badge">NORMAL</span>
+          </div>
+        </div>
+
+        <!-- スペクトラムビジュアライザー -->
+        <div class="visualizer-container">
+          <canvas id="visualizer"></canvas>
+        </div>
+
+        <!-- ゲームエリア -->
+        <div class="game-area">
+          <canvas id="gameCanvas"></canvas>
+          
+          <!-- 判定表示 -->
+          <div id="judgment" class="judgment"></div>
+          
+          <!-- パーティクルエフェクト用 -->
+          <canvas id="particleCanvas"></canvas>
+        </div>
+
+        <!-- 鍵盤エリア -->
+        <div id="keyboard" class="keyboard">
+          <!-- JavaScriptで動的生成 -->
+        </div>
+      </div>
+
+      <!-- リザルト画面 -->
+      <div id="resultScreen" class="screen">
+        <h1 class="result-title">🎉 Result</h1>
+        
+        <div class="result-content">
+          <div class="final-score">
+            <span class="label">Final Score</span>
+            <span id="finalScore" class="value">0</span>
+          </div>
+          
+          <div class="statistics">
+            <h3>判定統計</h3>
+            <div class="stat-grid">
+              <div class="stat-item perfect">
+                <span class="label">Perfect</span>
+                <span id="perfectCount" class="value">0</span>
+              </div>
+              <div class="stat-item good">
+                <span class="label">Good</span>
+                <span id="goodCount" class="value">0</span>
+              </div>
+              <div class="stat-item bad">
+                <span class="label">Bad</span>
+                <span id="badCount" class="value">0</span>
+              </div>
+              <div class="stat-item miss">
+                <span class="label">Miss</span>
+                <span id="missCount" class="value">0</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="accuracy">
+            <span class="label">Accuracy</span>
+            <span id="accuracy" class="value">0%</span>
+          </div>
+
+          <div class="recording-section">
+            <h3>🎵 あなたの演奏</h3>
+            <p class="description">プレイした内容が録音されています</p>
+            <div class="recording-buttons">
+              <button id="playRecording" class="btn btn-primary">
+                ▶ 再生
+              </button>
+              <button id="downloadWAV" class="btn btn-secondary">
+                💾 WAVダウンロード
+              </button>
+            </div>
+          </div>
+
+          <div class="result-actions">
+            <button id="retry" class="btn btn-large btn-primary">
+              🔄 もう一度プレイ
+            </button>
+            <button id="backToTitle" class="btn btn-large btn-secondary">
+              🏠 タイトルに戻る
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

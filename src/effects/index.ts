@@ -1,0 +1,6 @@
+/**
+ * エフェクトモジュールのエクスポート
+ */
+
+export * from './ParticleSystem';
+
