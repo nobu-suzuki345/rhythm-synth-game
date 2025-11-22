@@ -200,8 +200,8 @@ class App {
             // 既存のBGMを停止
             this.stopBGM();
             
-            // 新しいAudioオブジェクトを作成
-            this.bgmAudio = new Audio('/sound.mp3');
+            // 新しいAudioオブジェクトを作成（ベースパスを考慮）
+            this.bgmAudio = new Audio(`${import.meta.env.BASE_URL}sound.mp3`);
             this.bgmAudio.loop = true; // ループ再生
             this.bgmAudio.volume = 0.5; // 音量を50%に設定（必要に応じて調整）
             
