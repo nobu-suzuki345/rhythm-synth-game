@@ -1,6 +1,6 @@
 # 🎵 Rhythm Synth Game
 
-TypeScript + Web Audio APIで作る音楽リズムゲーム
+TypeScript + Web Audio APIで作る音楽リズムゲーム。プレイした内容が録音として残る！
 
 ## 🎯 概要
 
@@ -32,6 +32,7 @@ TypeScript + Web Audio APIで作る音楽リズムゲーム
 - ✅ 判定に応じた音質変化
 - ✅ 演奏の録音 & 再生
 - ✅ WAVファイル出力
+- ✅ BGM再生機能
 
 ## 🛠️ 技術スタック
 
@@ -246,7 +247,7 @@ MIT License - 自由に使用・改変・配布できます
 
 ## 👨‍💻 作者
 
-[@your-github-username](https://github.com/your-github-username)
+[@nobu-suzuki345](https://github.com/nobu-suzuki345)
 
 ---
 
@@ -255,4 +256,3 @@ MIT License - 自由に使用・改変・配布できます
 このゲームは、プログラミングの学習と音楽の楽しさを組み合わせたプロジェクトです。
 
 ぜひプレイして、あなたの演奏を録音してみてください！ 🎵
-
